@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 var Feed = require("./models/feed");
-var Item = require("./models/item");
+var Entry = require("./models/entry");
 
 var feeds = [
     {

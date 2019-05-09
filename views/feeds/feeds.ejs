@@ -9,40 +9,11 @@
       <script src="/scripts/feeds.js"></script>
    </head>
    <body>
-     <div class="dropdown">
-         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-         Dropdown button
-         </button>
-         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <% feeds.forEach(function(feed){ %>
-               <a class="dropdown-item" href="/feeds/<%= feed.id %>"><%= feed.feedTitle %></a>
-            <% }); %>
-         </div>
-      </div>
-      <form id="addFeed">
-        <div class="form-group">
-          <label for="feedUrl">Feed URL</label>
-          <input type="text" class="form-control" id="feedUrl" placeholder="Enter Feed URL">
-        </div>
-        <div class="form-group">
-          <label for="feedTitle">Feed Title</label>
-          <input type="text" class="form-control" id="feedTitle" placeholder="Feed Title">
-        </div>
-        <button type="submit" class="btn btn-primary">Add new Feed</button>
-      </form>
-      
-      <h2>FEED | <%= feed.title %></h2>
-      <% feed.items.forEach(function(item){ %>
-      <h3><%= item.title %></h3>
-      <p class="lead"><%= item.contentSnippet %></p>
-      <% }); %>
-      <script>
-      $("#addFeed").submit(function(e) {
-        var feedUrl = $('#feedUrl').val();
-        var feedTitle = $('#feedTitle').val();
-        addFeed(feedUrl, feedTitle);
-      });
-      </script>
+   <% feeds.forEach(function(feed){ %>
+      <h3><%= feed %></h3>
+   <% }); %>
+   <script>
+   </script>
 
 </body>   
 

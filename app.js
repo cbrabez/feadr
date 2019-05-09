@@ -1,12 +1,19 @@
 const express = require('express');
 var app         = express();
 var bodyParser  = require("body-parser");
+let Parser = require('rss-parser');
 var methodOverride = require("method-override");
 var    seedDB      = require("./seeds");
 var mongoose    = require("mongoose");
+var getFeeds = require("./public/scripts/getFeeds");
 
-var indexRoutes       = require("./routes/index"),
-    feedRoutes         = require("./routes/feeds");
+let parser = new Parser();
+
+var indexRoutes   = require("./routes/index"),
+    feedRoutes    = require("./routes/feeds"),
+    userRoutes    = require("./routes/UserController"),
+    authRoutes    = require("./auth/AuthController");
+
 mongoose.connect("mongodb://dev:internet123456@ds151596.mlab.com:51596/feadr");
 
 
@@ -18,6 +25,8 @@ app.use(methodOverride("_method"));
 
 app.use("/", indexRoutes);
 app.use("/feeds", feedRoutes);
+app.use('/users', userRoutes);
+app.use('/api/auth', authRoutes);
 
 // Server Setup
 /*
@@ -37,3 +46,5 @@ app.listen(port, (err) => {
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("Feadr Server has started!");
 });
+
+module.exports = app;

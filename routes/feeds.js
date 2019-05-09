@@ -3,15 +3,28 @@ var router = express.Router();
 let Parser = require('rss-parser');
 var Feed = require("../models/feed");
 let parser = new Parser();
-
+var getFeeds = require("../public/scripts/getFeeds");
 
 async function parseFeed(feed) {
   return parser.parseURL(feed).then(parsedFeed => { return parsedFeed });
 }
 
 router.get("/", function(req, res) {
-  
-});    
+   Feed.find({}).exec(function(err, allFeeds){
+   if(err){
+      console.log(err);
+   }else{
+      let feeds = [];
+      for(var i=0; i < allFeeds.length;i++){
+         //console.log(allFeeds[i].feedUrl);
+         feeds.push(allFeeds[i].feedUrl);   
+      }
+      console.log(feeds);
+      getFeeds.getEntries();
+      res.render("feeds/feeds", {feeds: feeds});
+   }
+});
+});
 
 router.get("/:id", function(req, res){
    //Get feedItems for selected feedID
@@ -25,7 +38,7 @@ router.get("/:id", function(req, res){
                } else{
                let feed = parseFeed(selectedFeed[0].feedUrl);
                feed.then(function(parsedFeed){
-                   res.render("feeds/feeds", {feed: parsedFeed, feeds: allFeeds});
+                  res.render("feeds/feeds", {feed: parsedFeed, feeds: allFeeds});
                });
                }
             });

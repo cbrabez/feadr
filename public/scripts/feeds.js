@@ -1,3 +1,14 @@
+$(function(){
+   
+
+
+   
+});
+
+async function parseFeed(feed) {
+  return parser.parseURL(feed).then(parsedFeed => { return parsedFeed });
+}
+
 function addFeed(feedurl, feedtitle){
    // var new_task = task;
    // var projectId = projectId;

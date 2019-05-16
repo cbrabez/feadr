@@ -1,0 +1,33 @@
+<h1>This is the View for one Feed</h1>
+<h2><%= feed[0].feedTitle %></h2>
+
+<% feed[0].items.forEach(function(item){ %>
+   <li><%= item.title %></li>
+<% }); %>
+
+
+<a href="#" id="feedRefresh" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Refresh</a>
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<script>
+$('#feedRefresh').click(function(e) {
+   var url = window.location.pathname;
+   var feedId = url.substring(url.lastIndexOf('/') + 1);
+   
+   $.ajax({
+  method: "POST",
+  url: "feed" + feedId + "/?_method=PUT",
+  data: {feedId: feedId},
+  success: function(result) {
+           console.log("Hi from the parseFeed function!");
+           location.reload(true);
+         }
+    });
+});
+
+
+
+</script>

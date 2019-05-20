@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <title>feadR · Minimalism for Feeds</title>
+
+    <!-- including fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/stylesheets/reset.css">
+    <!-- Bootstrap core CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- custom CSS -->
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/main.css">
+    <!-- including scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="/feedRefresh.js"></script>
+    
+  </head>
+  
+    <body>
+      <header class="cd-main-header">
+	    	<a href="#0" class="cd-logo"><img src="/images/cd-logo.svg" alt="Logo"></a>
+    
+	    	<a href="#0" class="cd-nav-trigger">Menu<span></span></a>
+    
+	    	<nav class="cd-nav">
+	    		<ul class="cd-top-nav">
+	    			
+                            <li><a href="/login">Login</a></li>
+                            <li><a href="/register">Sign Up</a></li>
+                        
+                            <li><a href="#">Signed In As ChrisDummy</a></li>
+                            <li><a href="/logout">Logout</a></li>
+                        
+	    		</ul>
+	    	</nav>
+	    </header> <!-- .cd-main-header -->
+	    <main class="cd-main-content">
+	      <nav class="cd-side-nav">
+	      	<ul>      
+	      	 		<li class="cd-label">Views</li>
+	      	      <li class="has-children">
+	      				  <a class="view" href="/projects/5c9ce5f10e60f30aea6e3caf">Inbox</a>
+	      				</li>
+	      				<li class="has-children">
+	      				  <a class="view" href="/tasks/weeklyplan">Current Week</a>
+	      				</li>
+	      			</li>
+	      			<li class="cd-label">Feeds</li>
+	      	      <% feeds.forEach(function(feed){ %>
+	      	      <li data-id="<%= feed._id %>" class="has-children <%= feed.feedTitle %>">
+	      				  <a class="feeds" href="/feeds/<%= feed._id %>"><%= feed.feedTitle %></a>
+	      				</li>
+	      				<% }); %>
+	      			</li>
+	      	</ul>
+	      	<ul>
+                  <li class="cd-label">Actions</li>
+                  <li class="action-btn"><a href="#" id="feedRefresh">Refresh</a></li>
+                  <li class="action-btn btn-add-project"><a href="#0">Add Project</a></li>
+              </ul>
+	      </nav>

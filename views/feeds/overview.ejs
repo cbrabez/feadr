@@ -1,10 +1,30 @@
+<% include ../partials/header %>
+
 <h1>This is gonna be a list of all your feeds</h1>
+
+<section class="feedContent">
+<div id="feedList" class="list-group">
+    <% feeds.forEach(function(feed){  %>
+      <% feed.items.forEach(function(item){ %>
+        <div class="list-group-item list-group-item-action flex-column align-items-start inaktiveLink">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1"><%= item.title %></h5>
+            <small><%= item.pubDate %></small>
+          </div>
+          <p class="mb-1"><%= item.contentSnippet %></p>
+          <a href="<%= item.link %>" target="_blank"><small class="text-muted entryLink">Zum Artikel</small></a>
+        </div>
+      <% }); %>
+    <% }); %>
+</section>
+
+
 
 <h2>Add new feed</h2>
 <form action="/feeds" method="POST">
   <div class="form-group">
-    <label for="feddUrl">Feed URL</label>
-    <input type="text" class="form-control" id="feedUrl" aria-describedby="emailHelp" placeholder="Enter Feed URL">
+    <label for="feedUrl">Feed URL</label>
+    <input type="text" class="form-control" id="feedUrl" name="feedUrl" aria-describedby="emailHelp" placeholder="Enter Feed URL">
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
@@ -12,3 +32,5 @@
 
 
 <a href="#" class="btn btn-secondary btn-lg active" id="feedRefresh" role="button" aria-pressed="true">Refresh</a>
+
+<% include ../partials/footer %>

@@ -1,33 +1,39 @@
-<h1>This is the View for one Feed</h1>
-<h2><%= feed[0].feedTitle %></h2>
+<% include ../partials/header %>
 
-<% feed[0].items.forEach(function(item){ %>
-   <li><%= item.title %></li>
-<% }); %>
+<h1 id="feedTitle" data-feed-url="<%= feed[0].feedUrl %>"><%= feed[0].feedTitle %></h1>
 
+<section class="feedContent">
 
-<a href="#" id="feedRefresh" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Refresh</a>
-
-<script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
+<div id="feedList" class="list-group">
+    <% feed[0].items.forEach(function(item){ %>
+        <div class="list-group-item list-group-item-action flex-column align-items-start inaktiveLink">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1"><%= item.title %></h5>
+            <small><%= item.pubDate %></small>
+          </div>
+          <p class="mb-1"><%= item.contentSnippet %></p>
+          <a href="<%= item.link %>" target="_blank"><small class="text-muted entryLink">Zum Artikel</small></a>
+        </div>
+    <% }); %>
+</section>
+</main><!-- .cd-main-content -->
 <script>
-$('#feedRefresh').click(function(e) {
-   var url = window.location.pathname;
+function getFeedID(url){
    var feedId = url.substring(url.lastIndexOf('/') + 1);
-   
-   $.ajax({
-  method: "POST",
-  url: "feed" + feedId + "/?_method=PUT",
-  data: {feedId: feedId},
-  success: function(result) {
-           console.log("Hi from the parseFeed function!");
-           location.reload(true);
-         }
-    });
+   return feedId;
+}
+
+$(function () {
+   feedId = getFeedID(window.location.pathname);
+   $("ul").find("[data-id='" + feedId + "']").addClass("active");
 });
 
-
-
+$('#feedRefresh').click(function(e) {
+   var feedId = getFeedID(window.location.pathname);
+   const feedTitle = document.querySelector('#feedTitle');
+   var feedUrl = feedTitle.dataset.feedUrl;
+   feedRefresh(feedId, feedUrl);
+});
 </script>
+
+<% include ../partials/footer %>

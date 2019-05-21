@@ -24,8 +24,13 @@ function getFeedID(url){
 }
 
 $(function () {
-   feedId = getFeedID(window.location.pathname);
+   var feedId = getFeedID(window.location.pathname);
+   var feedUrl = feedTitle.dataset.feedUrl;
    $("ul").find("[data-id='" + feedId + "']").addClass("active");
+   
+   var h = location.hash.substr(1);
+   if (h == 'reload')
+   feedRefresh(feedId, feedUrl);
 });
 
 $('#feedRefresh').click(function(e) {
@@ -33,6 +38,7 @@ $('#feedRefresh').click(function(e) {
    const feedTitle = document.querySelector('#feedTitle');
    var feedUrl = feedTitle.dataset.feedUrl;
    feedRefresh(feedId, feedUrl);
+   
 });
 </script>
 

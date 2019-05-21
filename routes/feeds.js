@@ -40,7 +40,7 @@ router.post('/', function (req, res) {
             if (err) return res.status(500).send("There was a problem adding the information to the database.");
             //res.set('Content-Type', 'text/html');
             //res.status(200).send('<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0; url=/feeds"></head></html>');
-            res.redirect("feeds/"+feed._id);
+            res.redirect("feeds/"+feed._id+"#reload");
             });
 });
 

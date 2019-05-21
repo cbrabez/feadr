@@ -11,7 +11,9 @@ $.ajax({
     url: "" + feedId + "/?_method=PUT",
     data: {feedId: feedId, feedUrl: feedUrl},
     success: function(result) {
-            console.log( "Load was performed." );
+            //console.log( "Load was performed." );
+            window.history.pushState({id: 'feedpage'}, 'Home | My App', '/feeds/' + feedId);
+            
             window.location.reload(true); 
          }
     });

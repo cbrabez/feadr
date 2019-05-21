@@ -8,8 +8,8 @@
 
     <!-- including fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
-    
     <link rel="stylesheet" href="/stylesheets/reset.css">
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <!-- Bootstrap core CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <!-- custom CSS -->
@@ -46,10 +46,7 @@
 	      	<ul>      
 	      	 		<li class="cd-label">Views</li>
 	      	      <li class="has-children">
-	      				  <a class="view" href="/projects/5c9ce5f10e60f30aea6e3caf">Inbox</a>
-	      				</li>
-	      				<li class="has-children">
-	      				  <a class="view" href="/tasks/weeklyplan">Current Week</a>
+	      				  <a class="view" href="/feeds/">All Feeds</a>
 	      				</li>
 	      			</li>
 	      			<li class="cd-label">Feeds</li>
@@ -59,10 +56,20 @@
 	      				</li>
 	      				<% }); %>
 	      			</li>
+	      			<li class="sidebar-button">
+	      			  <button id="feedRefresh" class="btn btn-primary"><i class="fas fa-sync"></i> Refresh</button>
+	      			</li>
 	      	</ul>
 	      	<ul>
-                  <li class="cd-label">Actions</li>
-                  <li class="action-btn"><a href="#" id="feedRefresh">Refresh</a></li>
-                  <li class="action-btn btn-add-project"><a href="#0">Add Project</a></li>
+                  <li class="cd-label">Add new Feeds</li>
+                  <li>
+                    <form class="addFeed" action="/feeds" method="POST">
+                      <div class="form-group">
+                        <!-- <label for="feedUrl">Add new feed</label> -->
+                        <input type="text" class="form-control" id="feedUrl" name="feedUrl" aria  -describedby                ="emailHelp" placeholder="Feed URL">
+                      </div>
+                      <button type="submit" class="btn btn-primary">Add Feed</button>
+                    </form>
+                  </li>
               </ul>
 	      </nav>

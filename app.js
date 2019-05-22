@@ -40,6 +40,16 @@ app.use(require('express-session')({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use( function (req, res, next) {
+  if ( req.method == 'POST' && req.url == '/login' ) {
+    if ( req.body.rememberme ) {
+      req.session.cookie.maxAge = 2592000000; // 30*24*60*60*1000 Rememeber 'me' for 30 days
+    } else {
+      req.session.cookie.expires = false;
+    }
+  }
+  next();
+});
 
 // passport config
 var Account = require('./models/account');

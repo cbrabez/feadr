@@ -2,6 +2,7 @@ var express = require('express');
 //var passport = require('passport');
 var Feed = require('../models/feed');
 var router = express.Router();
+var middleware = require("../middleware");
 let Parser = require('rss-parser');
 let parser = new Parser();
 
@@ -10,14 +11,14 @@ router.get('/', function (req, res) {
         if(err){
             console.log(err);
         }else{
-            console.log(feeds)
+            console.log(feeds);
             res.render('feeds/overview', {feeds: feeds});    
         }
     });
     
 });
 
-router.get('/:id', function (req, res) {
+router.get('/:id', middleware.isLoggedIn, function (req, res) {
     Feed.find({}).sort({'_id': -1}).lean().exec(function(err, feeds){
         if(err){console.log(err)}
         else{
